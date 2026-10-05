@@ -1,0 +1,55 @@
+:root {
+  --bg: #FAF6EF;
+  --surface: #FFFFFF;
+  --line: #E5DCCF;
+  --text: #1E1813;
+  --muted: #6E6052;
+  --accent: #F2B035;
+  --accent-ink: #1A1206;
+  --link: #8A5A08;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14110E;
+    --surface: #1F1A15;
+    --line: #2E2620;
+    --text: #F4EDE3;
+    --muted: #B3A594;
+    --link: #F2B035;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Assistant', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: 'Rubik', system-ui, sans-serif; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(34px, 7vw, 52px); font-weight: 800; }
+h2 { font-size: 24px; font-weight: 700; margin-top: 36px; }
+h3 { font-size: 18px; font-weight: 700; margin-top: 22px; }
+p, li { margin: 8px 0; }
+a { color: var(--link); }
+a:hover { text-decoration-thickness: 2px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 20px; }
+.brand img { width: 44px; height: 44px; border-radius: 11px; }
+.lang-links { display: flex; gap: 16px; font-weight: 600; }
+.hero { display: grid; gap: 18px; padding: 56px 0 24px; }
+.hero img { width: 112px; height: 112px; border-radius: 26px; }
+.lead { font-size: 20px; color: var(--muted); max-width: 560px; }
+.badge { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 700; border-radius: 999px; padding: 6px 14px; font-size: 15px; }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 24px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+.card h3 { margin-top: 0; }
+.card p { color: var(--muted); margin-bottom: 0; }
+.doc { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 20px; margin-top: 24px; }
+.doc ul { padding-inline-start: 22px; }
+.muted { color: var(--muted); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+footer { margin-top: 48px; color: var(--muted); font-size: 15px; display: flex; gap: 16px; flex-wrap: wrap; }
