@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הזמנה לערב טעימות · Flight Night</title>
+  <meta name="description" content="הוזמנת להצטרף למועדון טעימות באפליקציית ערב טעימות.">
+  <meta property="og:title" content="הוזמנת לערב טעימות 🍻">
+  <meta property="og:description" content="פותחים את הקישור כדי להצטרף למועדון באפליקציית ערב טעימות.">
+  <meta property="og:image" content="https://avilavi44.github.io/flight-night/icon.png">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Rubik:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .invite { text-align: center; display: grid; gap: 16px; justify-items: center; padding-top: 40px; }
+    .invite img { width: 96px; height: 96px; border-radius: 22px; }
+    .code { font-family: 'Rubik', sans-serif; font-weight: 800; font-size: 34px; letter-spacing: 2px; direction: ltr;
+            background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 12px 22px; }
+    .btn { display: block; width: 100%; max-width: 360px; text-align: center; text-decoration: none; font-weight: 700; font-size: 18px;
+           border-radius: 999px; padding: 15px 20px; background: var(--accent); color: var(--accent-ink); border: 0; cursor: pointer; font-family: inherit; }
+    .btn.secondary { background: transparent; color: var(--link); border: 1px solid var(--line); }
+    .steps { text-align: start; max-width: 420px; }
+    .steps li { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="invite">
+      <img src="icon.png" alt="">
+      <h1 style="font-size: 32px">הוזמנת לערב טעימות 🍻</h1>
+      <p class="lead" style="margin: 0">מצטרפים למועדון באפליקציה עם הקוד:</p>
+      <div class="code" id="code">—</div>
+      <a class="btn" id="open" href="#">פתיחה באפליקציה</a>
+      <button class="btn secondary" id="copy" type="button">העתקת הקוד</button>
+      <div class="doc steps">
+        <strong>עוד אין לך את האפליקציה?</strong>
+        <ol>
+          <li>האפליקציה עדיין בבדיקות — בקשו ממי ששלח את ההזמנה קישור להורדה (TestFlight באייפון, Firebase באנדרואיד).</li>
+          <li>אחרי ההתקנה חוזרים לקישור הזה ולוחצים "פתיחה באפליקציה",</li>
+          <li>או באפליקציה: המועדונים שלי ← הצטרפות עם קוד ← מקלידים את הקוד.</li>
+        </ol>
+      </div>
+      <p class="muted" style="font-size: 15px"><a href="./">ערב טעימות</a> · <a href="privacy.html">מדיניות פרטיות</a></p>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var raw = (params.get('c') || location.hash.slice(1) || '').toUpperCase();
+      var code = raw.replace(/[^A-Z0-9-]/g, '').slice(0, 12);
+      var codeEl = document.getElementById('code');
+      var open = document.getElementById('open');
+      if (!code) {
+        codeEl.textContent = '—';
+        open.style.display = 'none';
+        return;
+      }
+      codeEl.textContent = code;
+      var appUrl = 'flightnight://join/' + encodeURIComponent(code);
+      open.href = appUrl;
+      // Try the app straight away; if it isn't installed, this page stays with the instructions.
+      setTimeout(function () { location.href = appUrl; }, 300);
+      document.getElementById('copy').addEventListener('click', function () {
+        var btn = this;
+        (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject())
+          .then(function () { btn.textContent = 'הועתק ✓'; })
+          .catch(function () { btn.textContent = code; });
+      });
+    })();
+  </script>
+</body>
+</html>
